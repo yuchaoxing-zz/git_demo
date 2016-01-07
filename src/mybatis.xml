@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 引入外部数据库配置文件 -->
+	<!-- <properties resource="db.properties"></properties> -->
+	
+	<!-- 设置类型别名 -->
+	<typeAliases>
+		<typeAlias type="cn.zto.emp.eneity.EmpEntity" alias="empEntity"/>
+	</typeAliases>
+	
+	<!-- 
+	设置一个默认的连接环境
+	<environments default="mysql_developer">
+		连接环境信息，随便取一个名字
+		<environment id="mysql_developer">
+			mybatis使用jdbc事务管理方式
+			<transactionManager type="jdbc"></transactionManager>
+			mybatis使用连接池的方式来获取连接
+			<dataSource type="pooled">
+				配置与数据库交互的4个重要属性
+				<property name="driver" value="${mysql.driver}"/>
+				<property name="url" value="${mysql.url}"/>
+				<property name="username" value="${mysql.username}"/>
+				<property name="password" value="${mysql.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	 -->
+	 
+	<!-- 加载配置文件 -->
+	<mappers>
+		<mapper resource="cn/zto/emp/eneity/EmpMapper.xml"/>
+	</mappers>
+</configuration>

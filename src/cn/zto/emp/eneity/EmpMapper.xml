@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpEntityNameSpace">
+	<!-- 实体与表的映射 -->
+	<resultMap type="empEntity" id="empEntityMap">
+		<id property="empId" column="eid"/>
+		<result property="empName" column="ename"/>
+		<result property="empSal" column="esal"/>
+		<result property="empSex" column="esex"/>
+	</resultMap>
+	
+	<!-- 执行查询的sql -->
+	<select id="findAll" resultMap="empEntityMap">
+		select eid,ename,esal,esex
+		from emps
+	</select>
+
+	<select id="findByName" parameterType="string" resultMap="empEntityMap">
+		select eid,ename,esal,esex
+		from emps where ename like CONCAT('%',#{empName},'%')   
+	</select>
+	
+	<!-- 查询总记录数 -->
+	<select id="findByCount" resultType="int">
+		select count(*) from emps
+	</select>
+	
+	<!-- 查询分页结果集 -->
+	<select id="findByPage" parameterType="map" resultMap="empEntityMap">
+		select eid,ename,esal,esex 
+		from emps limit #{begin},#{limit}
+	</select>
+	
+	<!-- 执行删除的sql -->
+	<delete id="deleteEmp" parameterType="int">
+		delete from emps where eid=#{empId} 
+	</delete>
+	
+	<!-- 添加员工的sql -->
+	<insert id="addEmp" parameterType="empEntity">
+		insert into emps(ename,esal,esex) values(#{empName},#{empSal},#{empSex});
+	</insert>
+	
+	<!-- 修改员工的sql -->
+	<update id="updateEmp" parameterType="empEntity">
+		update emps set ename=#{empName},esal=#{empSal},esex=#{empSex} where eid=#{empId}
+	</update>
+</mapper>
